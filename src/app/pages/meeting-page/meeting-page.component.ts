@@ -271,7 +271,7 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
 
 
   getLiveComment() {
-    this.authenticateService.getLiveComment(this.meeting_link).subscribe((data: any) => {
+    this.authenticateService.getLiveComment(this.channel).subscribe((data: any) => {
       this.liveComment = data;
       console.log(this.liveComment)
     })
