@@ -1,0 +1,71 @@
+<!-- <button class="btn btn-success">ghvhgvghvghv</button> -->
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-8 col"></div>
+      <div class="col-sm-4" style="overflow-y: scroll; max-height: 650px">
+        <div class="row mt-4" *ngFor="let comment of liveComment">
+          <div class="col-sm-2">
+            <img
+              class="rounded-circle"
+              src="https://infodeltasys.nl/{{ comment.profile_url }}"
+            />
+          </div>
+          <div class="col-sm-9">
+            <h3>{{ comment.user_name }}</h3>
+            <p>{{ comment.message }}</p>
+            <img
+              *ngIf="comment.image"
+              src="https://infodeltasys.nl/{{ comment.image }}" style="height: 250px; width: 300px;"
+            />
+          </div>
+        </div>
+        <div class="comment-form">
+          <div>
+            <!-- <emoji-mart
+              class="emoji-mart"
+              *ngIf="showEmojiPicker"
+              (emojiClick)="addEmoji($event)"
+              [style]="{
+                bottom: '20px',
+                width: '100%'
+              }"
+              title="Pick your emoji…"
+            ></emoji-mart> -->
+          <!-- </div> -->
+          <form [formGroup]="CommentForm" (keyup.enter)="addLiveComment()">
+            <div class="form-group" style="display: flex">
+              <textarea
+                class="form-control"
+                placeholder="Write a comment..."
+                formControlName="comment"
+                #Comment
+                [(ngModel)]="comment"
+                name="comment"
+                required
+                style=" resize: none;"
+              ></textarea>
+              <span style="cursor: pointer" (click)="toggleEmojiPicker()"
+                >😀</span
+              >
+              <div class="image-upload">
+                <label for="comment">
+                  <i class="fas fa-camera"></i>
+                </label>
+                <input
+                  class="comment_image"
+                  id="comment"
+                  type="file"
+                  #Image
+                  #fileUploader
+                  accept="image/*"
+                  style="display: none"
+                  (change)="showPreview($event)"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

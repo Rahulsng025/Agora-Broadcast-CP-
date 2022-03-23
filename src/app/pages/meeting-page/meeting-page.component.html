@@ -1,0 +1,105 @@
+
+
+
+<!-- <button class="btn btn-success">ghvhgvghvghv</button> -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="vh-100 vw-100 d-flex flex-column position-relative">
+        <div class="views-container w-100 row position-relative">
+          <ng-container *ngIf="!pinnedUser">
+            <div class="col-3" *ngFor="let user of userList">
+              <app-meeting-participant [user]="user" (pinned)="onPin($event)"></app-meeting-participant>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="pinnedUser">
+            <div class="col-9 h-100">
+              <div class="pinned-container">
+                <app-meeting-participant [user]="pinnedUser" (pinned)="onPin($event)"></app-meeting-participant>
+              </div>
+            </div>
+            <div class="side-container col-3 h-100">
+              <ng-container *ngFor="let user of getUnpinnedUsers()">
+                <div class="mb-2">
+                  <app-meeting-participant [user]="user" (pinned)="onPin($event)"></app-meeting-participant>
+                </div>
+              </ng-container>
+            </div>
+          </ng-container>
+          <div class="meeting-description-container">
+            <h4>{{userList.length === 1 ?"You are alone here":"You and " + (userList.length - 1) + " user(s) are in meeting"}}
+            </h4>
+          </div>
+        </div>
+        <div class="controls-container">
+          <app-meeting-controls (cameraMuted)="onLocalCamera($event)" (micMuted)="onLocalMic($event)"
+            (hangedUp)="onLocalLeave()" (pinned)="onLocalPinned($event)"></app-meeting-controls>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4" style="overflow-y: scroll; max-height: 650px">
+      <div class="row mt-4" *ngFor="let comment of liveComment">
+        <div class="col-sm-2">
+          <img
+            class="rounded-circle"
+            src="https://infodeltasys.nl/{{ comment.profile_url }}" style="height: 60px; width: 60px;"
+          />
+        </div>
+        <div class="col-sm-9">
+          <h3>{{ comment.user_name }}</h3>
+          <p>{{ comment.message }}</p>
+          <img
+            *ngIf="comment.image"
+            src="https://infodeltasys.nl/{{ comment.image }}" style="height: 250px; width: 300px;"
+          />
+        </div>
+      </div>
+      <div class="comment-form">
+        <div>
+          <!-- <emoji-mart
+            class="emoji-mart"
+            *ngIf="showEmojiPicker"
+            (emojiClick)="addEmoji($event)"
+            [style]="{
+              bottom: '20px',
+              width: '100%'
+            }"
+            title="Pick your emoji…"
+          ></emoji-mart> -->
+        <!-- </div> -->
+        <form [formGroup]="CommentForm" (keyup.enter)="addLiveComment()">
+          <div class="form-group" style="display: flex">
+            <textarea
+              class="form-control"
+              placeholder="Write a comment..."
+              formControlName="comment"
+              #Comment
+              [(ngModel)]="comment"
+              name="comment"
+              required
+              style=" resize: none;"
+            ></textarea>
+            <span style="cursor: pointer" (click)="toggleEmojiPicker()"
+              >😀</span
+            >
+            <div class="image-upload">
+              <label for="comment">
+                <i class="fas fa-camera"></i>
+              </label>
+              <input
+                class="comment_image"
+                id="comment"
+                type="file"
+                #Image
+                #fileUploader
+                accept="image/*"
+                style="display: none"
+                (change)="showPreview($event)"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

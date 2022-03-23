@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("../node_modules/bootstrap/dist/css/bootstrap.min.css");
+/* @import '../node_modules/@ctrl/ngx-emoji-mart/picker'; */
+:root {
+  --meeting-control-height: 5.5rem;
+}
+
+app-meeting-page .controls-container {
+  height: var(--meeting-control-height);
+}
+
+app-meeting-page .views-container {
+  height: calc(100vh - var(--meeting-control-height));
+}
