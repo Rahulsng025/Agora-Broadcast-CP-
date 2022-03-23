@@ -250,7 +250,7 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
     this.message=this.CommentForm.value.comment;
     alert(this.message);
         const formData: FormData = new FormData(); 
-        formData.append('live_id', this.meeting_link);
+        formData.append('live_id', this.channel);
         if(this.selectedImage!=null){
           formData.append('image', this.selectedImage, this.selectedImage.name);
           alert(this.selectedImage.name);

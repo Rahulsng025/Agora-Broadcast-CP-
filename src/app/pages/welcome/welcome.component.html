@@ -1,3 +1,143 @@
+<!-- <div class="main-content-wrapper d-flex flex-column">
+  <div class="navbar-area">
+    <div class="main-responsive-nav">
+      <div class="main-responsive-menu">
+        <div class="responsive-burger-menu d-lg-none d-block">
+          <div (click)="showDiv.previous = !showDiv.previous">
+            <i class="fa fa-bars"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="main-navbar">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand d-flex align-items-center logoo">
+          <img src="assets/images/logoo.png" alt="image" />
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div class="navbar-burger-menu m-auto">
+            <button
+              class="btn btn-success"
+              (click)="showDiv.previous = !showDiv.previous"
+            >
+              <i class="fa fa-home"></i>
+            </button>
+          </div>
+          <div class="search-box m-auto">
+            <form>
+              <input type="text" class="input-search" placeholder="Search..." />
+              <button type="submit">
+                <i class="fa fa-search nav-search"></i>
+              </button>
+            </form>
+          </div>
+
+          <div class="others-options d-flex align-items-center">
+            <div class="option-item">
+              <a class="home-btn" href="#/dashboard"
+                ><i class="fa fa-home"></i
+              ></a>
+            </div>
+            <div class="option-item">
+              <div class="dropdown friend-requests-nav-item">
+                <a
+                  class="dropdown-bs-toggle"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <div class="friend-requests-btn" (click)="allUser()">
+                    <i class="fa fa-user"></i>
+                    <span>{{ requestCount }}</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <div class="option-item">
+              <div class="dropdown language-option">
+                <button
+                  class="dropdown-toggle"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i class="fa fa-globe"></i>
+                  <span class="lang-name"></span>
+                </button>
+                <div class="dropdown-menu language-dropdown-menu">
+                  <select (click)="selectLang($any($event.target).value)">
+                    <option
+                      *ngFor="let item of supportLanguages"
+                      [value]="item"
+                    >
+                      {{ item }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="option-item">
+              <div class="dropdown profile-nav-item">
+                <a
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <div class="menu-profile">
+                    <img
+                      *ngIf="newImage.profile"
+                      src="https://infodeltasys.nl/{{
+                        newImage.profile.image_url
+                      }}"
+                      class="rounded-circle"
+                      alt="image"
+                    />
+                    <img
+                      *ngIf="newImage.profile == null"
+                      src="../../../assets/images/person.jpg"
+                      class="rounded-circle"
+                      alt="image"
+                    />
+                    <span class="status-online"></span>
+                  </div>
+                </a>
+                <div class="dropdown-menu">
+                  <div class="profile-header">
+                    <h3>{{ newImage.name }}</h3>
+                  </div>
+                  <ul class="profile-body">
+                    <li>
+                      <i class="fa fa-address-book"></i>
+                      <a href="#/my-profile">My Profile</a>
+                    </li>
+
+                    <li>
+                      <i class="fa fa-lock"></i>
+                      <a href="#/privacy">Privacy</a>
+                    </li>
+
+                    <li>
+                      <i class="fa fa-power-off"></i>
+                      <a type="button" (click)="onLogout()">Logout</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+
+</div> -->
+<!-- Broadcast -->
 <div class="vh-100 vw-100 pt-4 pb-4">
   <div
     class="container text-white p-5"
