@@ -43,6 +43,7 @@
     "find-parent-dir": "^0.3.0",
     "firebase": "^8.10.0",
     "jquery": "^3.6.0",
+    "ng-translate": "^1.0.3",
     "ngx-agora-sdk-ng": "^1.0.0",
     "path": "^0.12.7",
     "popper.js": "^1.16.1",

@@ -154,7 +154,7 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
     this.subscriptions.push(localUserJoinedSubs);
     //alert(this.channel);
     this.getLiveComment();
-    interval(10 * 60).subscribe(x => {
+    interval(400 * 60).subscribe(x => {
       this.getLiveComment();
     });
   }
