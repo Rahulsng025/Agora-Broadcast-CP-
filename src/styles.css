@@ -12,3 +12,4 @@ app-meeting-page .controls-container {
 app-meeting-page .views-container {
   height: calc(100vh - var(--meeting-control-height));
 }
+

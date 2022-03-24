@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { forkJoin, Subscription } from 'rxjs';
+import { forkJoin, interval, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { IMediaTrack, IRemoteUser, NgxAgoraSdkNgService } from 'ngx-agora-sdk-ng';
 
@@ -51,6 +51,8 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
   selectedImage: any;
   message: string='';
   meeting_link: any;
+  array: any;
+  url: any;
   constructor(
     private activatedRoute: ActivatedRoute,
     private agoraService: NgxAgoraSdkNgService,
@@ -67,15 +69,21 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
   
       // const browserlang = this.translateService.getBrowserLang();
       // translateService.use(browserlang);
+
   }
 
   ngOnInit(): void {
-    this.meeting_link=localStorage.getItem('meeting_link') || '';
+    if(this.activatedRoute.snapshot.params.token){
+      this.token=this.activatedRoute.snapshot.params.token;
+    localStorage.setItem('id_token',this.token);
+    }
+   
+    this.meeting_link=localStorage.getItem('meeting_link');
     this.CommentForm = this.fb.group({
       comment: new FormControl('', [Validators.required])
     })
-    this.getLiveComment();
-
+   
+   
     this.getFriends();
     this.fetchImage();
     forkJoin([
@@ -103,7 +111,7 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
         this.videoInId = vInId;
         this.audioOutId = aOutId;
       });
-
+      
     const tokenSub = this.tokenService.token.pipe(take(1)).subscribe(token => {
       this.token = token;
       this.joinVideo();
@@ -144,6 +152,11 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
       this.userList.push({ type: 'local', mediaTrack: track.track });
     });
     this.subscriptions.push(localUserJoinedSubs);
+    //alert(this.channel);
+    this.getLiveComment();
+    interval(10 * 60).subscribe(x => {
+      this.getLiveComment();
+    });
   }
 
   ngOnDestroy(): void {
@@ -214,6 +227,7 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
   }
 
   fetchImage(){
+    
     this.authenticateService.getProfile().subscribe((data: any)=> {
       this.newImage = data
       console.log(data);
@@ -246,14 +260,18 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
     }
     
   addLiveComment(){
-    
+    if(this.activatedRoute.snapshot.params.link){
+      this.array=this.router.url.split('@');
+      this.channel=this.array[1]
+  alert(this.array[1]);
+      }
     this.message=this.CommentForm.value.comment;
-    alert(this.message);
+    //alert(this.message);
         const formData: FormData = new FormData(); 
         formData.append('live_id', this.channel);
         if(this.selectedImage!=null){
           formData.append('image', this.selectedImage, this.selectedImage.name);
-          alert(this.selectedImage.name);
+          // alert(this.selectedImage.name);
         console.log(this.selectedImage);
         
         }
@@ -271,9 +289,15 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
 
 
   getLiveComment() {
+    if(this.activatedRoute.snapshot.params.link){
+      this.array=this.router.url.split('@');
+      this.channel=this.array[1]
+  //alert(this.array[1]);
+      }
+    //alert(this.channel);
     this.authenticateService.getLiveComment(this.channel).subscribe((data: any) => {
       this.liveComment = data;
-      console.log(this.liveComment)
+      console.log(this.liveComment);
     })
   }
 

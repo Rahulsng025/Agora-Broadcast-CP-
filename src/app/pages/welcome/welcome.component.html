@@ -138,6 +138,15 @@
 
 </div> -->
 <!-- Broadcast -->
+<!-- 
+<div class="option-item" style="font-size: x-large">
+  <i
+    class="fa fa-home"
+    style="color: darkslategray"
+    type="submit"
+    (click)="onNavigate()"
+  ></i>
+</div>
 <div class="vh-100 vw-100 pt-4 pb-4">
   <div
     class="container text-white p-5"
@@ -145,12 +154,10 @@
   >
     <div class="row">
       <div class="col-md-6 mt-5 mb-5">
-        <h1>Broadcast - A simple way to connect</h1>
-        <!-- <h3 class="mt-4">
-          A demo of Agora SDK implementation with Angular 
-        </h3> -->
+        <h1 style="color: wheat">Broadcast - A simple way to connect</h1>
+      
         <a class="btn btn-success mt-4" [routerLink]="['/preview']">
-          New Meeting
+          New Broadcast
         </a>
       </div>
       <div class="col-md-6 mt-5 mb-5">
@@ -159,6 +166,86 @@
           class="img-fluid"
           style="width: 100%"
         />
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- <div class="option-item" style="font-size: x-large">
+  <i
+    class="fa fa-home"
+    style="color: darkslategray"
+    type="submit"
+    (click)="onNavigate()"
+  ></i>
+</div> -->
+
+<div class="option-item">
+  <div class="dropdown language-option">
+    <button
+      class="dropdown-toggle"
+      type="button"
+      data-bs-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      <i
+        class="fa fa-home"
+        style="color: darkslategray"
+        type="submit"
+        (click)="onNavigate()"
+      ></i
+      >&nbsp;
+      <i class="fa fa-globe" style="color: darkslategray"></i>
+
+      <span class="lang-name"></span>
+    </button>
+    <div class="dropdown-menu language-dropdown-menu">
+      <select (click)="selectLang($any($event.target).value)">
+        <option *ngFor="let item of supportLanguages" [value]="item">
+          {{ item }}
+        </option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="vh-70 vw-100 pt-4 pb-4">
+  <div
+    class="w-100 h-100 container bg-dark text-white p-5"
+    style="border-radius: 10px; background-color: darkslategray"
+  >
+    <div class="row">
+      <div class="col-md-6 mt-2 mb-5">
+        <h1 style="color: white">
+          <a href="http://community.infodeltasys.nl/dist/Frontend/#/dashboard"
+            >Community Portal</a
+          >
+          Live Broadcast for everyone.
+        </h1>
+        <hr />
+        <h3 class="mt-4" style="color: white">
+          Welcome back, Going live in easy in a few simple step
+        </h3>
+        <p class="mt-4" style="color: white">
+          <i class="fa fa-user" style="font-size: large; color: azure"></i>
+          Go live by yourself or with others
+        </p>
+
+        <p class="mt-4" style="color: white">
+          <i class="fa fa-comments" style="font-size: large; color: azure"></i>
+          People can respond to your live broadcast
+        </p>
+
+        <h6 class="mt-4" style="color: white">
+          Your live broadcast video will be available in more places, Few more
+          step to go live
+        </h6>
+        <a class="btn btn-success mt-4" [routerLink]="['/preview']">
+          New Broadcast
+        </a>
+      </div>
+      <div class="col-md-6 mt-5 mb-5">
+        <img src="assets/images/live3.jpg" style="width: 100%" />
       </div>
     </div>
   </div>

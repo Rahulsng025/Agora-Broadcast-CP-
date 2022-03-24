@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticateService } from 'app/shared/services/authenticate.service';
 
 @Component({
@@ -10,7 +10,8 @@ import { AuthenticateService } from 'app/shared/services/authenticate.service';
 export class WelcomeComponent implements OnInit {
 token: any
   constructor(private authenticate: AuthenticateService,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
 this.token= this.activatedRoute.snapshot.params.token;
@@ -29,6 +30,10 @@ localStorage.setItem('id_token',this.token);
     //   console.log(data);
       
     // })
+  }
+
+  onNavigate(){
+    window.location.href ="http://community.infodeltasys.nl/dist/Frontend/#/dashboard"
   }
 
  
