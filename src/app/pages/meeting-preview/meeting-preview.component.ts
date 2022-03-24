@@ -100,4 +100,10 @@ export class MeetingPreviewComponent implements OnInit, OnDestroy {
     this.router.navigate(['/meeting'], { queryParams: { channel, link } });
     
   }
+  onDashboardNavigate(){
+    window.location.href = "ommunity.infodeltasys.nl/dist/Frontend/#/dashboard"
+  }
+  onProfileNavigate(){
+    window.location.href = "ommunity.infodeltasys.nl/dist/Frontend/#/my-profile"
+  }
 }
