@@ -80,7 +80,7 @@ export class MeetingPreviewComponent implements OnInit, OnDestroy {
     const { channel, link } = this.connectionInfoForm?.value;
     if (channel) {
       const joinLink = this.tokeService.getLink(channel);
-      let meetinglink = location.origin+"/#/meeting?link="+ joinLink;
+      let meetinglink = location.origin+"/#/meeting?channel="+ joinLink;
       localStorage.setItem('meeting_link',joinLink);
       const formData =new FormData;
       formData.append('live_id', channel);
