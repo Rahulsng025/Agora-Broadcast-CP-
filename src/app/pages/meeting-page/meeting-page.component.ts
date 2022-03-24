@@ -259,39 +259,56 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
       }
     }
     
-    addLiveComment(){
-      this.channel=this.activatedRoute.snapshot.params.channel;
-      this.message=this.CommentForm.value.comment;
-      //alert(this.message);
-          const formData: FormData = new FormData(); 
-          formData.append('live_id', this.channel);
-          if(this.selectedImage!=null){
-            formData.append('image', this.selectedImage, this.selectedImage.name);
-            // alert(this.selectedImage.name);
-          console.log(this.selectedImage);
-          
-          }
-          if(this.message!=null){
-            formData.append('message', this.message);
-          } 
-         
-          this.authenticateService.addLiveComment(formData).subscribe((data: any) => {
-              console.log('Comment added successfully');
-              //this.authenticateService.successToaster('Comment added successfully','Success');
-              this.CommentForm.reset();
-              this.getLiveComment();
-            }) 
-    }
+  addLiveComment(){
+    if(this.activatedRoute.snapshot.params.link){
+      this.array=this.router.url.split('@');
+      this.channel=this.array[1]
+  //alert(this.array[1]);
+      }
+      if(this.activatedRoute.snapshot.params.token){
+        this.token=this.activatedRoute.snapshot.params.token;
+      localStorage.setItem('id_token',this.token);
+      }
+    this.message=this.CommentForm.value.comment;
+    //alert(this.message);
+        const formData: FormData = new FormData(); 
+        formData.append('live_id', this.channel);
+        if(this.selectedImage!=null){
+          formData.append('image', this.selectedImage, this.selectedImage.name);
+          // alert(this.selectedImage.name);
+        console.log(this.selectedImage);
+        
+        }
+        if(this.message!=null){
+          formData.append('message', this.message);
+        } 
+       
+        this.authenticateService.addLiveComment(formData).subscribe((data: any) => {
+            console.log('Comment added successfully');
+            //this.authenticateService.successToaster('Comment added successfully','Success');
+            this.CommentForm.reset();
+            this.getLiveComment();
+          }) 
+  }
 
 
-    getLiveComment() {
-      this.channel=this.activatedRoute.snapshot.params.channel;
-      //alert(this.channel);
-      this.authenticateService.getLiveComment(this.channel).subscribe((data: any) => {
-        this.liveComment = data;
-        console.log(this.liveComment);
-      })
-    }
+  getLiveComment() {
+    if(this.activatedRoute.snapshot.params.link){
+      this.array=this.router.url.split('@');
+      this.channel=this.array[1]
+ 
+      }
+      if(this.activatedRoute.snapshot.params.token){
+        this.token=this.activatedRoute.snapshot.params.token;
+      localStorage.setItem('id_token',this.token);
+      }
+    //alert(this.channel);
+    this.authenticateService.getLiveComment(this.channel).subscribe((data: any) => {
+      this.liveComment = data;
+      console.log(this.liveComment);
+    })
+  }
+
 
   // Nav bar area
 
