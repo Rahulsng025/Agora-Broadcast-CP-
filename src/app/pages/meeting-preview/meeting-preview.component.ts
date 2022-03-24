@@ -90,10 +90,11 @@ export class MeetingPreviewComponent implements OnInit, OnDestroy {
       }).catch(err=>{
         console.log(err);
       });
-      setTimeout(function(){
-        alert(`Link copied, You can Invite other people using the link: ${meetinglink}`);
-        alert(location.origin);
-     }, 1000)
+    //   setTimeout(function(){
+    //     alert(`Link copied, You can Invite other people using the link: ${meetinglink}`);
+    //     alert(location.origin);
+    //  }, 
+    //  1000)
      navigator.clipboard.writeText(meetinglink).then().catch(e => console.error(e));
      console.log(meetinglink);
     }

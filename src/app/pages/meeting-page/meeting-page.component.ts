@@ -263,7 +263,11 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
     if(this.activatedRoute.snapshot.params.link){
       this.array=this.router.url.split('@');
       this.channel=this.array[1]
-  alert(this.array[1]);
+  //alert(this.array[1]);
+      }
+      if(this.activatedRoute.snapshot.params.token){
+        this.token=this.activatedRoute.snapshot.params.token;
+      localStorage.setItem('id_token',this.token);
       }
     this.message=this.CommentForm.value.comment;
     //alert(this.message);
@@ -292,9 +296,13 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
     if(this.activatedRoute.snapshot.params.link){
       this.array=this.router.url.split('@');
       this.channel=this.array[1]
-  //alert(this.array[1]);
+ 
       }
-    //alert(this.channel);
+      if(this.activatedRoute.snapshot.params.token){
+        this.token=this.activatedRoute.snapshot.params.token;
+      localStorage.setItem('id_token',this.token);
+      }
+ 
     this.authenticateService.getLiveComment(this.channel).subscribe((data: any) => {
       this.liveComment = data;
       console.log(this.liveComment);
