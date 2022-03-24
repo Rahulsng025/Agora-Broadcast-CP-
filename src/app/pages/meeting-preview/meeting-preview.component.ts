@@ -83,7 +83,7 @@ export class MeetingPreviewComponent implements OnInit, OnDestroy {
       let meetinglink = location.origin+"/#/meeting?link="+ joinLink;
       localStorage.setItem('meeting_link',joinLink);
       const formData =new FormData;
-      formData.append('live_id', joinLink);
+      formData.append('live_id', channel);
       formData.append('user_id', this.user_id);
       this.authenticateService.addLiveIds(formData).toPromise().then(data=>{
         console.log('added live id');
