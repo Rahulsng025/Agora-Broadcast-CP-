@@ -56,16 +56,16 @@
           <img
             class="rounded-circle"
             src="https://infodeltasys.nl/{{ comment.profile_url }}"
-            style="height: 60px; width: 60px"
+            style="height: 50px; width: 50px"
           />
         </div>
         <div class="col-sm-9">
-          <h3>{{ comment.user_name }}</h3>
+          <h5>{{ comment.user_name }}</h5>
           <p>{{ comment.message }}</p>
           <img
             *ngIf="comment.image"
             src="https://infodeltasys.nl/{{ comment.image }}"
-            style="height: 250px; width: 300px"
+            style="height: 200px; width: 300px"
           />
         </div>
       </div>
