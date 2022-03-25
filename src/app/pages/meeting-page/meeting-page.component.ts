@@ -295,6 +295,9 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
             console.log('Comment added successfully');
             //this.authenticateService.successToaster('Comment added successfully','Success');
             this.CommentForm.reset();
+            this.comment='';
+            this.message='';
+            this.showEmojiPicker=false;
             this.getLiveComment();
           }) 
   }

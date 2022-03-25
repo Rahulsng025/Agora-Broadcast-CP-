@@ -31,14 +31,13 @@ import { AngularFireStorageModule } from '@angular/fire/storage'
 import { AngularFireAuthModule } from '@angular/fire/auth'
 import { environment } from '../environments/environment';
 import { LiveStreamingComponent } from './pages/live-streaming/live-streaming.component'
-import { PickerModule } from '@ctrl/ngx-emoji-mart'
 
 // Ng-x Translate
 // import { TranslateModule, TranslateLoader, TranslateService } from "@ngx-translate/core"
 // import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 //emoji
-// import { PickerModule } from '@ctrl/ngx-emoji-mart'
+import { PickerModule } from '@ctrl/ngx-emoji-mart'
 
 // export function HttpLoaderFactory(http: HttpClient){
 //   return new TranslateHttpLoader(http, 'assets/i18n');

@@ -51,12 +51,30 @@
       </div>
     </div>
     <div class="col-md-3" style="overflow-y: scroll; max-height: 650px">
+      <div
+        style="
+          position: sticky;
+          top: 0px;
+          background-color: white;
+          z-index: 1;
+          height: 100px;
+          padding: 10px;
+        "
+      >
+        <img
+          src="https://infodeltasys.nl/{{ newImage.profile.image_url }}"
+          class="rounded-circle"
+        />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span
+          ><b>{{ newImage.name }}</b></span
+        >
+      </div>
       <div class="row mt-4" *ngFor="let comment of liveComment">
         <div class="col-sm-2">
           <img
             class="rounded-circle"
             src="https://infodeltasys.nl/{{ comment.profile_url }}"
-            style="height: 50px; width: 50px"
+            style="height: 38px; width: 50px"
           />
         </div>
         <div class="col-sm-9">
@@ -74,7 +92,7 @@
           <emoji-mart
             class="emoji-mart"
             *ngIf="showEmojiPicker"
-            (emojiClick)="addEmoji($event)"
+            (emojiClick)="addEmoji($any($event))"
             [style]="{
               bottom: '20px',
               width: '100%'
