@@ -8,6 +8,7 @@ import { MediaService } from '../../shared/services/media.service';
 import { TokenService } from '../../shared/services/token.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticateService } from 'app/shared/services/authenticate.service';
+import { AnyARecord } from 'dns';
 
 
 export interface IMeetingUser {
@@ -30,7 +31,7 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
   audioInId = '';
   videoInId = '';
   audioOutId = '';
-  token = '';
+  token : any;
   mediaTrack?: IMediaTrack;
   pinnedUser?: IMeetingUser | null;
   supportLanguages = ['en', 'pashto', 'farsi', 'urdu','uz'];
@@ -73,8 +74,9 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if(this.activatedRoute.snapshot.params.token){
-      this.token=this.activatedRoute.snapshot.params.token;
+    // alert(this.activatedRoute.snapshot.queryParamMap.get('token'));
+    if(this.activatedRoute.snapshot.queryParamMap.get('token')){
+      this.token=this.activatedRoute.snapshot.queryParamMap.get('token');
     localStorage.setItem('id_token',this.token);
     }
    
