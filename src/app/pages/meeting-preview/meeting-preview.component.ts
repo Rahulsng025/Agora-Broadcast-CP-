@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticateService } from 'app/shared/services/authenticate.service';
+import { AnyRecord } from 'dns';
 import { Subscription } from 'rxjs';
 import { TokenService } from '../../shared/services/token.service';
 
@@ -18,6 +19,7 @@ export class MeetingPreviewComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   user: any;
   user_id: any;
+  random: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,6 +29,7 @@ export class MeetingPreviewComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+   this.random=Math.floor((Math.random() * 9999) + 1);
     this.getProfile();
     this.connectionInfoForm = this.formBuilder.group({
       channel: '',
@@ -73,33 +76,34 @@ export class MeetingPreviewComponent implements OnInit, OnDestroy {
     this.authenticateService.getProfile().toPromise().then(data=>{
       this.user=data;
       this.user_id=this.user.id;
+      alert(this.user_id);
     })
   }
 
   onJoinMeeting(): void {
     const { channel, link } = this.connectionInfoForm?.value;
     if (channel) {
-      const joinLink = this.tokeService.getLink(channel);
-      let meetinglink = location.origin+"/#/meeting?channel="+ joinLink;
-     
+      const joinLink = this.tokeService.getLink(channel+this.random);
+      let meetinglink = location.origin+"/#/meeting;link="+ joinLink;
       localStorage.setItem('meeting_link',joinLink);
       const formData =new FormData;
-      formData.append('live_id', channel);
+      //alert(channel);
+      formData.append('live_id', channel+this.random);
       formData.append('user_id', this.user_id);
       this.authenticateService.addLiveIds(formData).toPromise().then(data=>{
         console.log('added live id');
       }).catch(err=>{
         console.log(err);
       });
-    //   setTimeout(function(){
-    //     alert(`Link copied, You can Invite other people using the link: ${meetinglink}`);
-    //     alert(location.origin);
-    //  }, 
-    //  1000)
+      setTimeout(function(){
+        alert(`Link copied, You can Invite other people using the link: ${meetinglink}`);
+        alert(location.origin);
+     }, 1000)
      navigator.clipboard.writeText(meetinglink).then().catch(e => console.error(e));
      console.log(meetinglink);
     }
-    this.router.navigate(['/meeting'], { queryParams: { channel, link } });
+    const channel_name=channel+this.random
+    this.router.navigate(['/meeting'], { queryParams: { channel:channel_name, link } });
     
   }
   onDashboardNavigate(){

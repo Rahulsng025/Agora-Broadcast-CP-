@@ -98,6 +98,7 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
         this.link = params.link;
         this.channel = params.channel;
         if (this.link) {
+          
           const result = this.tokenService.getChannel(this.link);
           if (result.error) {
             alert(result.error);
@@ -154,9 +155,10 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
     this.subscriptions.push(localUserJoinedSubs);
     //alert(this.channel);
     this.getLiveComment();
-    interval(400 * 60).subscribe(x => {
+    interval(100 * 60).subscribe(x => {
       this.getLiveComment();
     });
+    
   }
 
   ngOnDestroy(): void {
@@ -239,12 +241,12 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
     this.showEmojiPicker=!this.showEmojiPicker;
   }
 
-  // addEmoji(event: { emoji: { native: string; }; }) {
-  //   const text= `${event.emoji.native}`;
-  //   this.comment+=event.emoji.native;
-  //   alert(this.comment);
-  //   this.emoji+= text;
-  //   }
+  addEmoji(event: { emoji: { native: string; }; }) {
+    const text= `${event.emoji.native}`;
+    this.comment+=event.emoji.native;
+    //alert(this.comment);
+    this.emoji+= text;
+    }
 
     showPreview(event: any) {
       if(event.target.files && event.target.files[0]){
@@ -260,15 +262,7 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
     }
     
   addLiveComment(){
-    if(this.activatedRoute.snapshot.params.link){
-      this.array=this.router.url.split('@');
-      this.channel=this.array[1]
-  //alert(this.array[1]);
-      }
-      if(this.activatedRoute.snapshot.params.token){
-        this.token=this.activatedRoute.snapshot.params.token;
-      localStorage.setItem('id_token',this.token);
-      }
+  // this.channel=this.activatedRoute.snapshot.params.channel;
     this.message=this.CommentForm.value.comment;
     //alert(this.message);
         const formData: FormData = new FormData(); 
@@ -293,15 +287,7 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
 
 
   getLiveComment() {
-    if(this.activatedRoute.snapshot.params.link){
-      this.array=this.router.url.split('@');
-      this.channel=this.array[1]
- 
-      }
-      if(this.activatedRoute.snapshot.params.token){
-        this.token=this.activatedRoute.snapshot.params.token;
-      localStorage.setItem('id_token',this.token);
-      }
+   // this.channel=this.activatedRoute.snapshot.channel;
     //alert(this.channel);
     this.authenticateService.getLiveComment(this.channel).subscribe((data: any) => {
       this.liveComment = data;
@@ -327,13 +313,13 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
   }
 
   // unblock(friend_id){
-  //   alert('block'+friend_id);
-  //   const formdata = new FormData();
-  //   formdata.append('status', '0');
-  //   this.authenticateService.unblock(friend_id,formdata).subscribe((data)=>{
-  //     this.friends = data;
-  //     console.log(data);
-  //   })
+  // alert('block'+friend_id);
+  // const formdata = new FormData();
+  // formdata.append('status', '0');
+  // this.authenticateService.unblock(friend_id,formdata).subscribe((data)=>{
+  // this.friends = data;
+  // console.log(data);
+  // })
   // }
 
   chat(profile: any,user_name: any,friend_id: any){
