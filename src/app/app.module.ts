@@ -31,6 +31,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage'
 import { AngularFireAuthModule } from '@angular/fire/auth'
 import { environment } from '../environments/environment';
 import { LiveStreamingComponent } from './pages/live-streaming/live-streaming.component'
+// import { PickerModule } from '@ctrl/ngx-emoji-mart'
 
 // Ng-x Translate
 // import { TranslateModule, TranslateLoader, TranslateService } from "@ngx-translate/core"
@@ -82,6 +83,7 @@ import { LiveStreamingComponent } from './pages/live-streaming/live-streaming.co
     FontAwesomeModule,
     CommonModule,
      AppRoutingModule,
+    //  PickerModule,
      AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireStorageModule,

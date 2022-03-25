@@ -74,8 +74,8 @@
         </div>
       </div>
       <div class="comment-form">
-        <div>
-          <!-- <emoji-mart
+        <!-- <div>
+          <emoji-mart
             class="emoji-mart"
             *ngIf="showEmojiPicker"
             (emojiClick)="addEmoji($event)"
@@ -84,8 +84,8 @@
               width: '100%'
             }"
             title="Pick your emoji…"
-          ></emoji-mart> -->
-          <!-- </div> -->
+          ></emoji-mart>
+          </div> -->
           <form [formGroup]="CommentForm" (keyup.enter)="addLiveComment()">
             <div class="form-group" style="display: flex">
               <textarea

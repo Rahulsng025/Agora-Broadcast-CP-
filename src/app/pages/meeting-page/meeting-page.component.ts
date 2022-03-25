@@ -239,12 +239,12 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
     this.showEmojiPicker=!this.showEmojiPicker;
   }
 
-  addEmoji(event: { emoji: { native: string; }; }) {
-    const text= `${event.emoji.native}`;
-    this.comment+=event.emoji.native;
-    //alert(this.comment);
-    this.emoji+= text;
-    }
+  // addEmoji(event: { emoji: { native: string; }; }) {
+  //   const text= `${event.emoji.native}`;
+  //   this.comment+=event.emoji.native;
+  //   alert(this.comment);
+  //   this.emoji+= text;
+  //   }
 
     showPreview(event: any) {
       if(event.target.files && event.target.files[0]){
