@@ -67,6 +67,10 @@ export class AuthenticateService {
     return this.http.get(`${this.uri}/auth/friend`, this.options)
   }
 
+  updateLiveId(FormData: any) {
+    return this.http.post(`${this.uri}/updatelive`, FormData,this.options)
+  }
+
 
   addLiveIds(FormData: any) {
     return this.http.post(`${this.uri}/live-data`, FormData)

@@ -158,7 +158,7 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
     interval(100 * 60).subscribe(x => {
       this.getLiveComment();
     });
-    
+    this.updateLive('active');
   }
 
   ngOnDestroy(): void {
@@ -191,7 +191,19 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
   onLocalLeave(): void {
     this.agoraService.leave();
     this.mediaTrack?.stop();
+    this.updateLive('inactive');
     this.router.navigate(['/..']);
+  }
+
+  updateLive(status: any){
+    const formData = new FormData;
+    formData.append('status',status);
+    formData.append('live_id',this.channel);
+    this.authenticateService.updateLiveId(formData).toPromise().then(data=>{
+      console.log(data);
+    }).catch(err=>{
+      console.log(err);
+    })
   }
 
   onPin(user: IMeetingUser): void {

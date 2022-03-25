@@ -15,7 +15,7 @@ export class MeetingPreviewComponent implements OnInit, OnDestroy {
   showSettings = false;
   joinLoading = false;
   newLoading = false;
-  connectionInfoForm?: FormGroup;
+  connectionInfoForm!: FormGroup;
   subscriptions: Subscription[] = [];
   user: any;
   user_id: any;
@@ -75,12 +75,12 @@ export class MeetingPreviewComponent implements OnInit, OnDestroy {
   getProfile(){
     this.authenticateService.getProfile().toPromise().then(data=>{
       this.user=data;
-      this.user_id=this.user.id;
-      alert(this.user_id);
+      //this.user_id=this.user.id;
+      //alert(this.user_id);
     })
   }
 
-  onJoinMeeting(): void {
+  onJoinMeeting(user_id: any): void {
     const { channel, link } = this.connectionInfoForm?.value;
     if (channel) {
       const joinLink = this.tokeService.getLink(channel+this.random);
@@ -89,7 +89,7 @@ export class MeetingPreviewComponent implements OnInit, OnDestroy {
       const formData =new FormData;
       //alert(channel);
       formData.append('live_id', channel+this.random);
-      formData.append('user_id', this.user_id);
+      formData.append('user_id', user_id);
       this.authenticateService.addLiveIds(formData).toPromise().then(data=>{
         console.log('added live id');
       }).catch(err=>{
@@ -106,6 +106,7 @@ export class MeetingPreviewComponent implements OnInit, OnDestroy {
     this.router.navigate(['/meeting'], { queryParams: { channel:channel_name, link } });
     
   }
+
   onDashboardNavigate(){
     window.location.href = "ommunity.infodeltasys.nl/dist/Frontend/#/dashboard"
   }

@@ -31,7 +31,10 @@
       >
         <div class="meeting-info">
           <h5>Preview Ready</h5>
-          <form [formGroup]="connectionInfoForm" (ngSubmit)="onJoinMeeting()">
+          <form
+            [formGroup]="connectionInfoForm"
+            (ngSubmit)="onJoinMeeting(user.id)"
+          >
             <div class="input-group input-group-sm mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text">Broadcaster Name</span>
