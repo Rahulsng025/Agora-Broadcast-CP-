@@ -87,8 +87,8 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
     this.CommentForm = this.fb.group({
       comment: new FormControl('', [Validators.required])
     })
-    setInterval(()=>{                          
-     this.fetchImage();
+    setTimeout(()=>{                          
+     location.reload();
  }, 5000);
    
     forkJoin([
