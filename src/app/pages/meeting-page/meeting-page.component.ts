@@ -79,15 +79,19 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
       this.token=this.activatedRoute.snapshot.queryParamMap.get('token');
     localStorage.setItem('id_token',this.token);
     }
+    
+    this.getFriends();
+    this.fetchImage();
    
     this.meeting_link=localStorage.getItem('meeting_link');
     this.CommentForm = this.fb.group({
       comment: new FormControl('', [Validators.required])
     })
-   
-   
-    this.getFriends();
+    setTimeout(()=>{                          
+      this.getFriends();
     this.fetchImage();
+ }, 3000);
+   
     forkJoin([
       this.activatedRoute.queryParams.pipe(take(1)),
       this.mediaService.selectedAudioInputId.pipe(take(1)),
