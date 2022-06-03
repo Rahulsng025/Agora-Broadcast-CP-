@@ -90,7 +90,7 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
     setTimeout(()=>{                          
       this.getFriends();
     this.fetchImage();
- }, 3000);
+ }, 5000);
    
     forkJoin([
       this.activatedRoute.queryParams.pipe(take(1)),
