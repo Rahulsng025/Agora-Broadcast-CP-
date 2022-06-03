@@ -31,7 +31,7 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
   audioInId = '';
   videoInId = '';
   audioOutId = '';
-  token : any;
+  token : any=null;
   mediaTrack?: IMediaTrack;
   pinnedUser?: IMeetingUser | null;
   supportLanguages = ['en', 'pashto', 'farsi', 'urdu','uz'];
@@ -79,17 +79,23 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
       this.token=this.activatedRoute.snapshot.queryParamMap.get('token');
     localStorage.setItem('id_token',this.token);
     }
-    
+    if(this.token!=null){
+      this.getFriends();
+      this.fetchImage();
+    }
+   
     this.getFriends();
     this.fetchImage();
-   
     this.meeting_link=localStorage.getItem('meeting_link');
     this.CommentForm = this.fb.group({
       comment: new FormControl('', [Validators.required])
     })
-    setTimeout(()=>{                          
-     location.reload();
- }, 5000);
+    if (!localStorage.getItem('foo')) { 
+      localStorage.setItem('foo', 'no reload') 
+      location.reload() 
+    } else {
+      localStorage.removeItem('foo') 
+    }
    
     forkJoin([
       this.activatedRoute.queryParams.pipe(take(1)),
@@ -161,6 +167,7 @@ export class MeetingPageComponent implements OnInit, OnDestroy {
     //alert(this.channel);
     this.getLiveComment();
     interval(100 * 60).subscribe(x => {
+
       this.getLiveComment();
     });
     this.updateLive('active');
